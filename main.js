@@ -30,7 +30,7 @@ const command = process.argv[2];
 // the name they want it run on
 const name = process.argv[3]
 // the corresponding client
-const client = clients[names.indexOf(name) !== -1] 
+const client = clients[names.indexOf(name)]; 
 
 
 // get a random client from whatever list was passed in
@@ -60,17 +60,34 @@ const getRank = function(client) {
   // this is backwards or something? they're supposed to be ranked
   // from lowest to highest, and the top one (spider, obviously) should
   // be ranked #1
-  let rank = clients.length - clients.indexOf(client);
+  const clientLocation = clients.indexOf(client);
+  
+  const rank = clients.length - clientLocation;
   return rank;
 }
 
 const getMatch = function(client) {
   // get the client's location in our data
   const clientLocation = clients.indexOf(client);
+  let neighbor1 = "";
+  let neighbor2 = "";
 
   // find their two nearest neighbors
-  const neighbor1 = clients[clientLocation - 1];
-  const neighbor2 = clients[clientLocation + 1];
+  if(clientLocation === 0) {
+    neighbor1 = clients[clientLocation + 1];
+    neighbor2 = clients[clientLocation + 2];
+  }
+
+  else if(clientLocation === clients.length - 1) {
+    neighbor1 = clients[clientLocation - 1];
+    neighbor2 = clients[clientLocation + 1];  
+  }
+
+  else {
+    neighbor1 = clients[clientLocation - 1];
+    neighbor2 = clients[clientLocation - 2];
+  }
+
   const neighbors = [neighbor1, neighbor2];
 
   // pick one of them and return it
