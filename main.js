@@ -30,7 +30,7 @@ const command = process.argv[2];
 // the name they want it run on
 const name = process.argv[3]
 // the corresponding client
-const client = clients[names.indexOf(name) !== -1]
+const client = clients[names.indexOf(name) !== -1] 
 
 
 // get a random client from whatever list was passed in
@@ -45,10 +45,12 @@ const matchRandomly = function(client) {
   // exclude our client from matches by making an array of everyone else
   // find all the clients before our client in the system
   const clientsBeforeOurClient = clients.slice(0, clientLocation);
+  
   // find all the clients after our client in the system
-  const clientsAfterOurClient = clients.slice(clientLocation);
+  const clientsAfterOurClient = clients.slice(clientLocation + 1);
+  
   // add them together
-  const otherClients = clientsBeforeOurClient + clientsAfterOurClient;
+  const otherClients = clientsBeforeOurClient.concat(clientsAfterOurClient);
 
   // return a random client from the remaining pool
   return randomClient(otherClients);
