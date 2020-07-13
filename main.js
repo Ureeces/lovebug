@@ -58,9 +58,10 @@ const matchRandomly = function(client) {
 
 const getRank = function(client) {
   // this is backwards or something? they're supposed to be ranked
-  // from lowest to highest, and the top one (spider, obvously) should
+  // from lowest to highest, and the top one (spider, obviously) should
   // be ranked #1
-  return clients.indexOf(client);
+  let rank = clients.length - clients.indexOf(client);
+  return rank;
 }
 
 const getMatch = function(client) {
